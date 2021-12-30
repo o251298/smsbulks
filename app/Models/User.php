@@ -55,6 +55,9 @@ class User extends Authenticatable
 
     public function checkUpSendSms()
     {
+        if (!$this->getBalance()){
+            return false;
+        }
         if ($this->getBalance()->current_sum < Message::PRICE){
             return false;
         } else {
