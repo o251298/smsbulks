@@ -4,6 +4,8 @@
 namespace App\Services;
 
 
+use Illuminate\Support\Facades\Log;
+
 class APISingle
 {
     protected $token = 'HLxFRtg5YnUyrwuGUUWEd2H3un6CbCVJ';
@@ -28,6 +30,7 @@ class APISingle
             'originator' => $this->origanator
         ];
         $data = json_encode($data_array);
+        Log::info($data);
         return $data;
     }
 
@@ -50,6 +53,7 @@ class APISingle
         ]);
         $result = curl_exec($ch);
         $res = $result;
+        Log::info($res);
         curl_close($ch);
         return $res;
     }
