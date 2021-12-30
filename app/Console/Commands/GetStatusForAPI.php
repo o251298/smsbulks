@@ -48,7 +48,7 @@ class GetStatusForAPI extends Command
         if (count($messages) > 0){
             foreach ($messages as $item){
                 $token = 'HLxFRtg5YnUyrwuGUUWEd2H3un6CbCVJ';
-                $url = 'https://api.acemountmedia.com/sms/status';
+                $url = 'http://api.acemountmedia.com/sms/status';
                 $data_array = [
                     'id_sms' => [$item->provider_id]
                 ];
