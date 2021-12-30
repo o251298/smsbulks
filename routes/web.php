@@ -22,7 +22,44 @@ use Illuminate\Support\Facades\Storage;
 */
 
 Route::get('/', function () {
-    
+
+    $data = [
+        "phones" => ["380635661329"],
+        "text" => "testasd sms",
+        "originator" => "Shop Zakaz"
+    ];
+
+    $data = json_encode($data);
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/json',
+            'Content-Length: ' . strlen($data),
+            'X-Requested-With: XMLHttpRequest',
+            'Accept: application/json, text/javascript, */*; q=0.01',
+            'Authorization: Bearer ' . 'HLxFRtg5YnUyrwuGUUWEd2H3un6CbCVJ')
+    );
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+    curl_setopt($ch, CURLOPT_URL, 'https://api.acemountmedia.com/sms-v2/send');
+    $result = curl_exec($ch);
+    $res = $result;
+    curl_close($ch);
+
+    dd($res);
+
+
+
+
+    $number1 = new \App\Services\GroupParser('/app/numbers.csv');
+    $number1->parse();
+
+    echo '</br>';
+    $number = new \App\Services\GroupParser('/app/book.csv');
+    $number->parse();
+
+    die();
 //    function run(){
 //        $arr = ["380508047845", "380635661329", "380962540183", "380504047845", "380508046845", "380501047845", "380508047846"];
 //        while(count($arr) != 0){
