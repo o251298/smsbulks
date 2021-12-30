@@ -49,6 +49,7 @@
                     <h5 class="card-title">Вы можете загрузить базу в формате csv (разделитель - запятая).</h5>
                     <p>Номера в базе должны юыть только Украинские, в противном случае - база не загрузиться. Так же номера должны быть в МЕЖДУНАРОДНОМ формате (380). Все пробелы, спец символы будут обрезаны автоматически</p>
                     <p>Так же при парсинге базы будут удалены дубли и отсеяны некорректные номера</p>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/9eQnz29AcPg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
