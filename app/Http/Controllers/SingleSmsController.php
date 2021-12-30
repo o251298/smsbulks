@@ -34,6 +34,7 @@ class SingleSmsController extends Controller
         $sms->setData();
         $res = $sms->connect();
         $res = json_decode($res, true);
+        Log::info($res);
         if (isset($res['error_request'])) return redirect()->back()->with('error', "Некорректные данные");
         $info = $res['success_request']['info'];
         $id = $info['phone_id_status'][$request->phone];
