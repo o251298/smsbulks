@@ -23,14 +23,6 @@ use Illuminate\Support\Facades\Storage;
 
 Route::get('/', function () {
 
-    $number1 = new \App\Services\GroupParser('/app/numbers.csv');
-    $number1->parse();
-
-    echo '</br>';
-    $number = new \App\Services\GroupParser('/app/book.csv');
-    $number->parse();
-
-    die();
 //    function run(){
 //        $arr = ["380508047845", "380635661329", "380962540183", "380504047845", "380508046845", "380501047845", "380508047846"];
 //        while(count($arr) != 0){
