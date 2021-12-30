@@ -7,7 +7,7 @@ namespace App\Services;
 class APIBulk
 {
     protected $token = 'HLxFRtg5YnUyrwuGUUWEd2H3un6CbCVJ';
-    protected $url = 'https://api.acemountmedia.com/sms-v2/send';
+    protected $url = 'http://api.acemountmedia.com/sms-v2/send';
     public $phone;
     public $massage;
     public $origanator;
