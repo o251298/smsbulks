@@ -23,14 +23,14 @@ use Illuminate\Support\Facades\Storage;
 
 Route::get('/', function () {
 
-//    $number1 = new \App\Services\GroupParser('/app/numbers.csv');
-//    $number1->parse();
-//
-//    echo '</br>';
-//    $number = new \App\Services\GroupParser('/app/book.csv');
-//    $number->parse();
-//
-//    die();
+    $number1 = new \App\Services\GroupParser('/app/numbers.csv');
+    $number1->parse();
+
+    echo '</br>';
+    $number = new \App\Services\GroupParser('/app/book.csv');
+    $number->parse();
+
+    die();
 //    function run(){
 //        $arr = ["380508047845", "380635661329", "380962540183", "380504047845", "380508046845", "380501047845", "380508047846"];
 //        while(count($arr) != 0){
@@ -119,6 +119,7 @@ Route::group([
     Route::get('/groups', [GroupController::class, 'index'])->name('groups.index');
     Route::get('/groups/create', [GroupController::class, 'create'])->name('groups.create');
     Route::post('/groups/store', [GroupController::class, 'store'])->name('groups.store');
+    Route::get('/groups/{id}', [GroupController::class, 'view'])->name('groups.view');
     Route::get('/reports', [Reports::class, 'index'])->name('reports.index');
     Route::get('/balance', [BalanceController::class, 'create'])->name('balance.create');
     Route::get('/balance/list', [BalanceController::class, 'index'])->name('balance.index');

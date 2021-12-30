@@ -9,4 +9,6 @@ class Number extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+
 }

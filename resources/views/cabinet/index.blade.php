@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Auth;
                     </div>
                 </div>
                 @endif
-
                     @if(session('error'))
                         <div style="padding: 10px">
                             <div class="alert bg-warning alert-warning text-white"  role="alert">

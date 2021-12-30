@@ -15,8 +15,12 @@
                 <div class="nav-item">
                     <a href="{{route('send.single')}}"><i class="ik ik-menu"></i><span>Одиночная смс</span> <!--<span class="badge badge-success">New</span> --></a>
                 </div>
-                <div class="nav-item">
-                    <a href="{{route('groups.create')}}"><i class="ik ik-menu"></i><span>База номеров</span> <span class="badge badge-success">dev</span></a>
+                <div class="nav-item has-sub">
+                    <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>Базы номеров</span> <span class="badge badge-danger">2+</span></a>
+                    <div class="submenu-content">
+                        <a href="{{route('groups.index')}}" class="menu-item">База номеров <span class="badge badge-success">New</span></a>
+                        <a href="{{route('groups.create')}}" class="menu-item">Создать базу <span class="badge badge-success">New</span></a>
+                    </div>
                 </div>
                 <div class="nav-item">
                     <a href="{{route('reports.index')}}"><i class="ik ik-menu"></i><span>Отчет смс</span> <!--<span class="badge badge-success">New</span> --></a>
