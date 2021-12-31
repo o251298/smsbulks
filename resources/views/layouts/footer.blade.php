@@ -119,6 +119,7 @@
 <script src="{{asset('/template/js/charts.js')}}"></script>
 <script src="{{asset('/template/dist/js/theme.min.js')}}"></script>
 <script src="{{asset('/template/js/count.js')}}"></script>
+<script src="{{asset('/js/getCoast.js')}}"></script>
 <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
 <script>
     (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=

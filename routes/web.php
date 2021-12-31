@@ -9,6 +9,7 @@ use App\Http\Controllers\GroupController;
 use App\Http\Controllers\Reports;
 use App\Http\Controllers\BalanceController;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\BulkSmsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -108,6 +109,9 @@ Route::group([
 ], function (){
     Route::get('/send/single', [SingleSmsController::class, 'index'])->name('send.single');
     Route::post('/send/single/send', [SingleSmsController::class, 'send'])->name('send.single.send');
+    Route::get('/send/bulk/', [BulkSmsController::class, 'index'])->name('send.bulk');
+    Route::post('/send/bulk/send', [BulkSmsController::class, 'store'])->name('send.bulk.send');
+    Route::post('/bulk/coast', [BulkSmsController::class, 'coastBulk']);
     Route::get('/groups', [GroupController::class, 'index'])->name('groups.index');
     Route::get('/groups/create', [GroupController::class, 'create'])->name('groups.create');
     Route::post('/groups/store', [GroupController::class, 'store'])->name('groups.store');

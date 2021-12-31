@@ -15,6 +15,10 @@
                 <div class="nav-item">
                     <a href="{{route('send.single')}}"><i class="ik ik-menu"></i><span>Одиночная смс</span> <!--<span class="badge badge-success">New</span> --></a>
                 </div>
+                <div class="nav-item">
+                    <a href="{{route('send.bulk')}}"><i class="ik ik-menu"></i><span>Массовая отправка смс</span> <span class="badge badge-success">New</span></a>
+                </div>
+
                 <div class="nav-item has-sub">
                     <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>Базы номеров</span> <span class="badge badge-danger">2+</span></a>
                     <div class="submenu-content">

@@ -2,7 +2,7 @@
 @section('content')
     @if(isset($messages) && !empty($messages))
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-8">
             <div class="card">
 
                 <div class="card-header d-block">
@@ -26,7 +26,7 @@
                             <tr>
                                 <th scope="row">{{$message->id}}</th>
                                 <td>{{$message->number}}</td>
-                                <td>{{$message->text}}</td>
+                                <td>{{$message->short_message}}</td>
                                 <td>{{$message->created_at}}</td>
                                 <td>{{$message->change_time}}</td>
                                 @if($message->status == "0")
