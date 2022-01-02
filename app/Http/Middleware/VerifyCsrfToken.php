@@ -12,6 +12,7 @@ class VerifyCsrfToken extends Middleware
      * @var array<int, string>
      */
     protected $except = [
-        'http://localhost/bulk/coast'
+        'http://localhost/bulk/coast',
+        'https://smsbulks.ru/bulk/coast'
     ];
 }
