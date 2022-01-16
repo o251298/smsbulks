@@ -5,53 +5,34 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Balance;
 use App\Models\Message;
+use App\Services\API\SetDataMessage;
 use App\Services\APISingle;
+use App\Services\SingleMessage\SendSingle;
+use App\Http\Requests\SendMessageRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class SingleSmsController extends Controller
 {
+    // контролер должен выводить информация и принимать информацию, сама логика должна быть в СЕРВИСЕ!!!
     public function index()
     {
         return view('cabinet.index');
     }
 
-    public function send(Request $request)
+    public function send(SendMessageRequest $request)
     {
-        // validate message, get part
-        $part = Message::validatePart($request->text);
-        if ($part == 0){
-            return redirect()->back()->with('too_many_parts_in_message', 'Ошибка отправления, слишком много частей, разрешается 4');
+        $sms = new SendSingle($request);
+        if ($error = $sms->getError()){
+            return redirect()->back()->with(array_key_first($error), $error[array_key_first($error)]);
         }
-        // get pay
-        $pay = 0.36 * $part;
-        if (Auth::user()->getBalance()->current_sum < $pay){
-            return redirect()->back()->with('not_has_money', 'Ошибка отправления, недостаточно денег для отправки ' . $part . 'х частей');
+        $sms->payMassage();
+        $status = $sms->sendMessage($request->phone);
+        if (array_key_exists('success_request', $status)){
+            return redirect()->back()->with('success_single_sms', 'Смс ушпешно отправлено');
+        } else {
+            return redirect()->back()->with('error', $status[array_key_first($status)]);
         }
-        Balance::payMessage($part, Message::PRICE);
-        $sms = new APISingle($request->phone, $request->text, $request->originator);
-        $sms->setData();
-        $res = $sms->connect();
-        $res = json_decode($res, true);
-        Log::info($res);
-        if (isset($res['error_request'])) return redirect()->back()->with('error', "Некорректные данные");
-        $info = $res['success_request']['info'];
-        $id = $info['phone_id_status'][$request->phone];
-        if ($id){
-            $message = Message::create([
-                'user_id' => Auth::id(),
-                'number' => $request->phone,
-                'originator' => $request->originator,
-                'text' => $request->text,
-                'status' => 0,
-                'aggregator_id' => 1,
-                'provider_id' => $id,
-            ]);
-            Log::info($message);
-        }
-        return redirect()->back()->with('success_single_sms', 'Смс ушпешно отправлено');
     }
-
-
 }

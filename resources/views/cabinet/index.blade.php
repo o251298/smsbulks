@@ -1,7 +1,9 @@
 <?php
 use Illuminate\Support\Facades\Auth;
 ?>
+
 @extends('layouts.master')
+@section('title', "Отправка одиночного смс")
 @section('content')
     <div class="row">
         <div class="col-md-6">
@@ -47,6 +49,11 @@ use Illuminate\Support\Facades\Auth;
                     <form class="forms-sample" method="post" action="{{route('send.single.send')}}">
                         @csrf
                         <div class="form-group">
+                            @error('originator')
+                            <div class="alert alert-danger" role="alert">
+                                {{$message}}
+                            </div>
+                            @enderror
                             <label for="exampleSelectGender">Имя отправителя</label>
                             <select class="form-control" name="originator">
                                 <option>Shop Zakaz</option>
@@ -54,11 +61,22 @@ use Illuminate\Support\Facades\Auth;
                         </div>
 
                         <div class="form-group">
+
+                            @error('phone')
+                            <div class="alert alert-danger" role="alert">
+                                {{$message}}
+                            </div>
+                            @enderror
                             <label for="exampleInputPassword4">Номер</label>
                             <input type="text" class="form-control" name="phone" placeholder="Номер получателя">
                         </div>
 
                         <div class="form-group">
+                            @error('text')
+                            <div class="alert alert-danger" role="alert">
+                                {{$message}}
+                            </div>
+                            @enderror
                             <label for="exampleTextarea1">Текст смс</label>
                             <textarea class="form-control" id="textMessage" name="text" rows="4"></textarea>
                         </div>

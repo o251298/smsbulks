@@ -10,7 +10,7 @@ class Message extends Model
     use HasFactory;
     protected $guarded = [];
 
-    const PRICE = 0.36;
+    const PRICE = 0.50;
 
     public function getStatus()
     {

@@ -2,6 +2,7 @@
 use Illuminate\Support\Facades\Auth;
 ?>
 @extends('layouts.master')
+@section('title', "Массовая отправка смс")
 @section('content')
     <div class="row">
         <div class="col-md-6">
@@ -22,7 +23,7 @@ use Illuminate\Support\Facades\Auth;
                 @endif
                 @if(session('too_many_parts_in_message'))
                     <div style="padding: 10px">
-                        <div class="alert bg-warning alert-warning text-white"  role="alert">
+                        https://github.com/o251298/laravel_shop_ecome/tree/master/resources/views/admin                  <div class="alert bg-warning alert-warning text-white"  role="alert">
                             {{session('too_many_parts_in_message')}}
                         </div>
                     </div>
@@ -47,6 +48,11 @@ use Illuminate\Support\Facades\Auth;
                     <form class="forms-sample" method="post" action="{{route('send.bulk.send')}}">
                         @csrf
                         <div class="form-group">
+                            @error('originator')
+                            <div class="alert alert-danger" role="alert">
+                                {{$message}}
+                            </div>
+                            @enderror
                             <label for="exampleSelectGender">Имя отправителя</label>
                             <select class="form-control" name="originator">
                                 <option>Shop Zakaz</option>
@@ -55,6 +61,11 @@ use Illuminate\Support\Facades\Auth;
 
                         @if($groups && !empty($groups))
                         <div class="form-group">
+                            @error('group')
+                            <div class="alert alert-danger" role="alert">
+                                {{$message}}
+                            </div>
+                            @enderror
                             <label for="exampleSelectGender">База номеров</label>
                             <select id="select" class="form-control" name="group">
                                 @foreach($groups as $item)
@@ -72,6 +83,11 @@ use Illuminate\Support\Facades\Auth;
 {{--                        </div>--}}
 
                         <div class="form-group">
+                            @error('text')
+                            <div class="alert alert-danger" role="alert">
+                                {{$message}}
+                            </div>
+                            @enderror
                             <label for="exampleTextarea1">Текст смс</label>
                             <textarea class="form-control" id="textMessage" name="text" rows="4"></textarea>
                         </div>
