@@ -8,6 +8,13 @@ use App\Http\Controllers\GroupController;
 use App\Http\Controllers\Reports;
 use App\Http\Controllers\BalanceController;
 use App\Http\Controllers\BulkSmsController;
+use Illuminate\Support\Facades\Cookie;
+use App\Http\Controllers\Admin\MainController;
+use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\OriginatorController;
+use App\Http\Controllers\Admin\OriginatorController as AdminOriginatorController;
+use App\Http\Controllers\Admin\MessageController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -21,13 +28,13 @@ use App\Http\Controllers\BulkSmsController;
 */
 
 Route::get('/', function () {
-    return view('main');
+return view('main');
 });
 
 Auth::routes();
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('user');
 Route::group([
-    'middleware'  => 'auth'
+    'middleware'  => ['auth', 'user']
 ], function (){
     Route::get('/send/single', [SingleSmsController::class, 'index'])->name('send.single');
     Route::post('/send/single/send', [SingleSmsController::class, 'send'])->name('send.single.send');
@@ -43,5 +50,22 @@ Route::group([
     Route::get('/balance/list', [BalanceController::class, 'index'])->name('balance.index');
     Route::get('/balance/destroy/{id}', [BalanceController::class, 'destroy'])->name('balance.destroy');
     Route::post('/balance/store', [BalanceController::class, 'store'])->name('balance.store');
+
+    Route::get('/originator/create', [OriginatorController::class, 'create'])->name('originator.create');
+    Route::post('/originator/store', [OriginatorController::class, 'store'])->name('originator.store');
+    Route::get('/originators', [OriginatorController::class, 'index'])->name('originator.list');
+});
+Route::group([
+    'middleware' => ['auth', 'admin'],
+    'prefix' => 'admin'
+], function (){
+    Route::get('/', [MainController::class, 'index'])->name('admin');
+    Route::get('/users', [UsersController::class, 'index'])->name('admin.users');
+    Route::get('/users/destroy/{user}', [UsersController::class, 'destroy'])->name('admin.users.destroy');
+    Route::get('/admin/change/{id}', [UsersController::class, 'change'])->name('change');
+    Route::get('/originators', [AdminOriginatorController::class, 'index'])->name('admin.originators');
+    Route::get('/originators/activate/{originator}', [AdminOriginatorController::class, 'activate'])->name('admin.originators.activate');
+    Route::get('/originators/deactivate/{originator}', [AdminOriginatorController::class, 'deactivate'])->name('admin.originators.deactivate');
+    Route::get('/messages', [MessageController::class, 'index'])->name('admin.messages');
 });
 

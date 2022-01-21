@@ -1,6 +1,8 @@
+<?php
+use App\Models\Message;
+?>
 @extends('layouts.master')
 @section('content')
-
         <div class="container-fluid">
             <div class="row clearfix">
                 <div class="col-lg-3 col-md-6 col-sm-12">
@@ -8,17 +10,17 @@
                         <div class="widget-body">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="state">
-                                    <h6>Bookmarks</h6>
-                                    <h2>1,410</h2>
+                                    <h6>Смс в статусе "Недоставлено"</h6>
+                                    <h2>{{Message::UnsuccessfulMessageToday()}}</h2>
                                 </div>
                                 <div class="icon">
                                     <i class="ik ik-award"></i>
                                 </div>
                             </div>
-                            <small class="text-small mt-10 d-block">6% higher than last month</small>
+{{--                            <small class="text-small mt-10 d-block">6% higher than last month</small>--}}
                         </div>
                         <div class="progress progress-sm">
-                            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="62" aria-valuemin="0" aria-valuemax="100" style="width: 62%;"></div>
+                            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: {{Message::UnsuccessfulMessageToday()}}%;"></div>
                         </div>
                     </div>
                 </div>
@@ -27,55 +29,55 @@
                         <div class="widget-body">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="state">
-                                    <h6>Likes</h6>
-                                    <h2>41,410</h2>
+                                    <h6>Смс в статусе "Доставлено"</h6>
+                                    <h2>{{Message::SuccessMessageToday()}}</h2>
                                 </div>
                                 <div class="icon">
                                     <i class="ik ik-thumbs-up"></i>
                                 </div>
                             </div>
-                            <small class="text-small mt-10 d-block">61% higher than last month</small>
+{{--                            <small class="text-small mt-10 d-block">61% higher than last month</small>--}}
                         </div>
                         <div class="progress progress-sm">
-                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100" style="width: 78%;"></div>
+                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100" style="width: {{Message::SuccessMessageToday()}}%;"></div>
                         </div>
                     </div>
                 </div>
+{{--                <div class="col-lg-3 col-md-6 col-sm-12">--}}
+{{--                    <div class="widget">--}}
+{{--                        <div class="widget-body">--}}
+{{--                            <div class="d-flex justify-content-between align-items-center">--}}
+{{--                                <div class="state">--}}
+{{--                                    <h6>Запланированные рассылки</h6>--}}
+{{--                                    <h2>410</h2>--}}
+{{--                                </div>--}}
+{{--                                <div class="icon">--}}
+{{--                                    <i class="ik ik-calendar"></i>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <small class="text-small mt-10 d-block">Total Events</small>--}}
+{{--                        </div>--}}
+{{--                        <div class="progress progress-sm">--}}
+{{--                            <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="31" aria-valuemin="0" aria-valuemax="100" style="width: 31%;"></div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
                 <div class="col-lg-3 col-md-6 col-sm-12">
                     <div class="widget">
                         <div class="widget-body">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="state">
-                                    <h6>Events</h6>
-                                    <h2>410</h2>
-                                </div>
-                                <div class="icon">
-                                    <i class="ik ik-calendar"></i>
-                                </div>
-                            </div>
-                            <small class="text-small mt-10 d-block">Total Events</small>
-                        </div>
-                        <div class="progress progress-sm">
-                            <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="31" aria-valuemin="0" aria-valuemax="100" style="width: 31%;"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="widget">
-                        <div class="widget-body">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="state">
-                                    <h6>Comments</h6>
-                                    <h2>41,410</h2>
+                                    <h6>Коефициент доставки за месяц</h6>
+                                    <h2>{{Message::GetConversionForMonth()}}</h2>
                                 </div>
                                 <div class="icon">
                                     <i class="ik ik-message-square"></i>
                                 </div>
                             </div>
-                            <small class="text-small mt-10 d-block">Total Comments</small>
+                            <small class="text-small mt-10 d-block">{{Message::GetConversionForMonth()}} из 100%</small>
                         </div>
                         <div class="progress progress-sm">
-                            <div class="progress-bar bg-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%;"></div>
+                            <div class="progress-bar bg-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: {{ceil(Message::GetConversionForMonth())}}%;"></div>
                         </div>
                     </div>
                 </div>
@@ -203,97 +205,97 @@
 {{--                        </div>--}}
 {{--                    </div>--}}
 {{--                </div>--}}
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="d-flex">
-                                <h4 class="card-title">Weather Report</h4>
-                                <select class="form-control w-25 ml-auto">
-                                    <option selected="">Today</option>
-                                    <option value="1">Weekly</option>
-                                </select>
-                            </div>
-                            <div class="d-flex align-items-center flex-row mt-30">
-                                <div class="p-2 f-50 text-info"><i class="wi wi-day-showers"></i> <span>23<sup>°</sup></span></div>
-                                <div class="p-2">
-                                    <h3 class="mb-0">Saturday</h3><small>Banglore, India</small></div>
-                            </div>
-                            <table class="table table-borderless">
-                                <tbody>
-                                <tr>
-                                    <td>Wind</td>
-                                    <td class="font-medium">ESE 17 mph</td>
-                                </tr>
-                                <tr>
-                                    <td>Humidity</td>
-                                    <td class="font-medium">83%</td>
-                                </tr>
-                                <tr>
-                                    <td>Pressure</td>
-                                    <td class="font-medium">28.56 in</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                            <hr>
-                            <ul class="list-unstyled row text-center city-weather-days mb-0 mt-20">
-                                <li class="col"><i class="wi wi-day-sunny mr-5"></i><span>09:30</span><h3>20<sup>°</sup></h3></li>
-                                <li class="col"><i class="wi wi-day-cloudy mr-5"></i><span>11:30</span><h3>22<sup>°</sup></h3></li>
-                                <li class="col"><i class="wi wi-day-hail mr-5"></i><span>13:30</span><h3>25<sup>°</sup></h3></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card" style="min-height: 422px;">
-                        <div class="card-header">
-                            <h3>Timeline</h3>
-                            <div class="card-header-right">
-                                <ul class="list-unstyled card-option">
-                                    <li><i class="ik ik-chevron-left action-toggle"></i></li>
-                                    <li><i class="ik ik-minus minimize-card"></i></li>
-                                    <li><i class="ik ik-x close-card"></i></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="card-body timeline">
-                            <div class="header bg-theme" style="background-image: url('img/placeholder/placeimg_400_200_nature.jpg')">
-                                <div class="color-overlay d-flex align-items-center">
-                                    <div class="day-number">8</div>
-                                    <div class="date-right">
-                                        <div class="day-name">Monday</div>
-                                        <div class="month">February 2018</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <ul>
-                                <li>
-                                    <div class="bullet bg-pink"></div>
-                                    <div class="time">11am</div>
-                                    <div class="desc">
-                                        <h3>Attendance</h3>
-                                        <h4>Computer Class</h4>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="bullet bg-green"></div>
-                                    <div class="time">12pm</div>
-                                    <div class="desc">
-                                        <h3>Design Team</h3>
-                                        <h4>Hangouts</h4>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="bullet bg-orange"></div>
-                                    <div class="time">2pm</div>
-                                    <div class="desc">
-                                        <h3>Finish</h3>
-                                        <h4>Go to Home</h4>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+{{--                <div class="col-md-4">--}}
+{{--                    <div class="card">--}}
+{{--                        <div class="card-body">--}}
+{{--                            <div class="d-flex">--}}
+{{--                                <h4 class="card-title">Weather Report</h4>--}}
+{{--                                <select class="form-control w-25 ml-auto">--}}
+{{--                                    <option selected="">Today</option>--}}
+{{--                                    <option value="1">Weekly</option>--}}
+{{--                                </select>--}}
+{{--                            </div>--}}
+{{--                            <div class="d-flex align-items-center flex-row mt-30">--}}
+{{--                                <div class="p-2 f-50 text-info"><i class="wi wi-day-showers"></i> <span>23<sup>°</sup></span></div>--}}
+{{--                                <div class="p-2">--}}
+{{--                                    <h3 class="mb-0">Saturday</h3><small>Banglore, India</small></div>--}}
+{{--                            </div>--}}
+{{--                            <table class="table table-borderless">--}}
+{{--                                <tbody>--}}
+{{--                                <tr>--}}
+{{--                                    <td>Wind</td>--}}
+{{--                                    <td class="font-medium">ESE 17 mph</td>--}}
+{{--                                </tr>--}}
+{{--                                <tr>--}}
+{{--                                    <td>Humidity</td>--}}
+{{--                                    <td class="font-medium">83%</td>--}}
+{{--                                </tr>--}}
+{{--                                <tr>--}}
+{{--                                    <td>Pressure</td>--}}
+{{--                                    <td class="font-medium">28.56 in</td>--}}
+{{--                                </tr>--}}
+{{--                                </tbody>--}}
+{{--                            </table>--}}
+{{--                            <hr>--}}
+{{--                            <ul class="list-unstyled row text-center city-weather-days mb-0 mt-20">--}}
+{{--                                <li class="col"><i class="wi wi-day-sunny mr-5"></i><span>09:30</span><h3>20<sup>°</sup></h3></li>--}}
+{{--                                <li class="col"><i class="wi wi-day-cloudy mr-5"></i><span>11:30</span><h3>22<sup>°</sup></h3></li>--}}
+{{--                                <li class="col"><i class="wi wi-day-hail mr-5"></i><span>13:30</span><h3>25<sup>°</sup></h3></li>--}}
+{{--                            </ul>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <div class="col-md-4">--}}
+{{--                    <div class="card" style="min-height: 422px;">--}}
+{{--                        <div class="card-header">--}}
+{{--                            <h3>Timeline</h3>--}}
+{{--                            <div class="card-header-right">--}}
+{{--                                <ul class="list-unstyled card-option">--}}
+{{--                                    <li><i class="ik ik-chevron-left action-toggle"></i></li>--}}
+{{--                                    <li><i class="ik ik-minus minimize-card"></i></li>--}}
+{{--                                    <li><i class="ik ik-x close-card"></i></li>--}}
+{{--                                </ul>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="card-body timeline">--}}
+{{--                            <div class="header bg-theme" style="background-image: url('img/placeholder/placeimg_400_200_nature.jpg')">--}}
+{{--                                <div class="color-overlay d-flex align-items-center">--}}
+{{--                                    <div class="day-number">8</div>--}}
+{{--                                    <div class="date-right">--}}
+{{--                                        <div class="day-name">Monday</div>--}}
+{{--                                        <div class="month">February 2018</div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <ul>--}}
+{{--                                <li>--}}
+{{--                                    <div class="bullet bg-pink"></div>--}}
+{{--                                    <div class="time">11am</div>--}}
+{{--                                    <div class="desc">--}}
+{{--                                        <h3>Attendance</h3>--}}
+{{--                                        <h4>Computer Class</h4>--}}
+{{--                                    </div>--}}
+{{--                                </li>--}}
+{{--                                <li>--}}
+{{--                                    <div class="bullet bg-green"></div>--}}
+{{--                                    <div class="time">12pm</div>--}}
+{{--                                    <div class="desc">--}}
+{{--                                        <h3>Design Team</h3>--}}
+{{--                                        <h4>Hangouts</h4>--}}
+{{--                                    </div>--}}
+{{--                                </li>--}}
+{{--                                <li>--}}
+{{--                                    <div class="bullet bg-orange"></div>--}}
+{{--                                    <div class="time">2pm</div>--}}
+{{--                                    <div class="desc">--}}
+{{--                                        <h3>Finish</h3>--}}
+{{--                                        <h4>Go to Home</h4>--}}
+{{--                                    </div>--}}
+{{--                                </li>--}}
+{{--                            </ul>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
             </div>
 
 

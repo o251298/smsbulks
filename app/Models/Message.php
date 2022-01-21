@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Services\Other\DB\DataBase;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Message extends Model
 {
@@ -65,5 +67,74 @@ class Message extends Model
     {
         $fullText = $this->text;
         return substr($fullText, 0, 10) . ' ........';
+    }
+
+    public static function SuccessMessageToday()
+    {
+        $db = DataBase::getConnection();
+        $sql = "SELECT COUNT(id) as count FROM messages
+                WHERE user_id =" . Auth::id() . " AND DATE(created_at) = DATE(NOW()) AND status = 1" ;
+        $result = $db->prepare($sql);
+        $result->execute();
+        $count = $result->fetch();
+        return $count['count'];
+    }
+    public static function UnsuccessfulMessageToday()
+    {
+        $db = DataBase::getConnection();
+        $sql = "SELECT COUNT(id) as count FROM messages
+                WHERE user_id =" . Auth::id() . " AND DATE(created_at) = DATE(NOW()) AND status = 0" ;
+        $result = $db->prepare($sql);
+        $result->execute();
+        $count = $result->fetch();
+        return $count['count'];
+    }
+    public static function SuccessMessageMonth()
+    {
+        $db = DataBase::getConnection();
+        $sql = "SELECT COUNT(id) as count FROM messages
+                WHERE user_id =" . Auth::id() . " AND YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW()) AND status = 1";
+        $result = $db->prepare($sql);
+        $result->execute();
+        $count = $result->fetch();
+        return $count['count'];
+    }
+    public static function UnsuccessfulMessageMonth()
+    {
+        $db = DataBase::getConnection();
+        $sql = "SELECT COUNT(id) as count FROM messages
+                WHERE user_id =" . Auth::id() . " AND YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW()) AND (status = 0 OR status = 2)";
+        $result = $db->prepare($sql);
+        $result->execute();
+        $count = $result->fetch();
+        return $count['count'];
+    }
+    public static function SentMessageMonth()
+    {
+        $db = DataBase::getConnection();
+        $sql = "SELECT COUNT(id) as count FROM messages
+                WHERE user_id=" . Auth::id() . " AND YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW())";
+        $result = $db->prepare($sql);
+        $result->execute();
+        $count = $result->fetch();
+        return $count['count'];
+    }
+
+
+
+    public static function GetConversionForMonth()
+    {
+        /*
+         * S*100/K.
+         *  S – количество продаж за определенный период времени;
+         *  K – общее количество клиентов за определенный период времени
+         */
+        $success = self::SuccessMessageMonth();
+        $all = self::SentMessageMonth();
+        if ($all == 0){
+            $all = 100;
+        }
+        $conversion = $success * 100/$all;
+        return round($conversion, 2);
     }
 }

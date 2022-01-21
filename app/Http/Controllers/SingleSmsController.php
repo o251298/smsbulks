@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Balance;
 use App\Models\Message;
+use App\Models\Originator;
 use App\Services\API\SetDataMessage;
 use App\Services\APISingle;
 use App\Services\SingleMessage\SendSingle;
 use App\Http\Requests\SendMessageRequest;
+use Barryvdh\Debugbar\Facades\Debugbar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -18,7 +20,10 @@ class SingleSmsController extends Controller
     // контролер должен выводить информация и принимать информацию, сама логика должна быть в СЕРВИСЕ!!!
     public function index()
     {
-        return view('cabinet.index');
+        $originators = Auth::user()->originators()->where('status', '1');
+        return view('cabinet.index', [
+            'originators' => $originators
+        ]);
     }
 
     public function send(SendMessageRequest $request)

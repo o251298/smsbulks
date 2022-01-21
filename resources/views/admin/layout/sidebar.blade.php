@@ -1,6 +1,6 @@
 <div class="app-sidebar colored">
     <div class="sidebar-header">
-        <a class="header-brand" href="/">
+        <a class="header-brand" href="{{route('admin')}}">
             <span class="text">ThemeKit</span>
         </a>
     </div>
@@ -8,42 +8,43 @@
     <div class="sidebar-content">
         <div class="nav-container">
             <nav id="main-menu-navigation" class="navigation-main">
-                <div class="nav-lavel">Navigation</div>
+                <div class="nav-lavel">ADMIN</div>
                 <div class="nav-item active">
-                    <a href="/home"><i class="ik ik-bar-chart-2"></i><span>Главная</span></a>
                 </div>
                 <div class="nav-item">
-                    <a href="{{route('send.single')}}"><i class="ik ik-menu"></i><span>Одиночная смс</span> <!--<span class="badge badge-success">New</span> --></a>
+                    <a href="{{route('admin')}}"><i class="ik ik-monitor"></i><span>Статистика</span></a>
                 </div>
-                <div class="nav-item">
-                    <a href="{{route('send.bulk')}}"><i class="ik ik-menu"></i><span>Массовая отправка смс</span> <!--<span class="badge badge-success">New</span> --></a>
-                </div>
-
                 <div class="nav-item has-sub">
-                    <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>Базы номеров</span> <span class="badge badge-danger">2+</span></a>
+                    <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>Пользователи</span> <span class="badge badge-danger">2+</span></a>
                     <div class="submenu-content">
-                        <a href="{{route('groups.index')}}" class="menu-item">База номеров <span class="badge badge-success">New</span></a>
-                        <a href="{{route('groups.create')}}" class="menu-item">Создать базу <span class="badge badge-success">New</span></a>
-                    </div>
-                </div>
-                <div class="nav-item">
-                    <a href="{{route('reports.index')}}"><i class="ik ik-menu"></i><span>Отчет смс</span> <!--<span class="badge badge-success">New</span> --></a>
-                </div>
-
-                <div class="nav-item has-sub">
-                    <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>Пакеты</span> <span class="badge badge-danger">2+</span></a>
-                    <div class="submenu-content">
-                        <a href="{{route('balance.create')}}" class="menu-item">Создать пакет <span class="badge badge-success">New</span></a>
-                        <a href="{{route('balance.index')}}" class="menu-item">Список пакетов <span class="badge badge-success">New</span></a>
+                        <a href="{{route('admin.users')}}" class="menu-item">Список пользователей<span class="badge badge-success">New</span></a>
                     </div>
                 </div>
 
                 <div class="nav-item has-sub">
-                    <a href="#"><i class="ik ik-box"></i><span>Альфа имена</span><span class="badge badge-success">New</span></a>
+                    <a href="#"><i class="ik ik-package"></i><span>Рассылки смс</span> <span class="badge badge-success">DEV</span></a>
                     <div class="submenu-content">
-                        <a href="{{route('originator.create')}}" class="menu-item">Создать</a>
+                        <a href="{{route('admin.messages')}}" class="menu-item">Все смс</a>
                     </div>
                 </div>
+                <div class="nav-item has-sub">
+                    <a href="#"><i class="ik ik-package"></i><span>Альфа имена</span> <span class="badge badge-success">DEV</span></a>
+                    <div class="submenu-content">
+                        <a href="{{route('admin.originators')}}" class="menu-item">Альфа имена заявки</a>
+                    </div>
+                </div>
+{{--                <div class="nav-item">--}}
+{{--                    <a href="{{route('reports.index')}}"><i class="ik ik-menu"></i><span>Отчет смс</span> <!--<span class="badge badge-success">New</span> --></a>--}}
+{{--                </div>--}}
+
+{{--                <div class="nav-item has-sub">--}}
+{{--                    <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>Пакеты</span> <span class="badge badge-danger">2+</span></a>--}}
+{{--                    <div class="submenu-content">--}}
+{{--                        <a href="{{route('balance.create')}}" class="menu-item">Создать пакет <span class="badge badge-success">New</span></a>--}}
+{{--                        <a href="{{route('balance.index')}}" class="menu-item">Список пакетов <span class="badge badge-success">New</span></a>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+
 {{--                <div class="nav-item has-sub">--}}
 {{--                    <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>Widgets</span> <span class="badge badge-danger">150+</span></a>--}}
 {{--                    <div class="submenu-content">--}}
@@ -54,7 +55,15 @@
 {{--                    </div>--}}
 {{--                </div>--}}
 {{--                <div class="nav-lavel">UI Element</div>--}}
-
+{{--                <div class="nav-item has-sub">--}}
+{{--                    <a href="#"><i class="ik ik-box"></i><span>Basic</span></a>--}}
+{{--                    <div class="submenu-content">--}}
+{{--                        <a href="pages/ui/alerts.html" class="menu-item">Alerts</a>--}}
+{{--                        <a href="pages/ui/badges.html" class="menu-item">Badges</a>--}}
+{{--                        <a href="pages/ui/buttons.html" class="menu-item">Buttons</a>--}}
+{{--                        <a href="pages/ui/navigation.html" class="menu-item">Navigation</a>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
 {{--                <div class="nav-item has-sub">--}}
 {{--                    <a href="#"><i class="ik ik-gitlab"></i><span>Advance</span> <span class="badge badge-success">New</span></a>--}}
 {{--                    <div class="submenu-content">--}}
@@ -65,12 +74,7 @@
 {{--                        <a href="pages/ui/rating.html" class="menu-item">Rating</a>--}}
 {{--                    </div>--}}
 {{--                </div>--}}
-{{--                <div class="nav-item has-sub">--}}
-{{--                    <a href="#"><i class="ik ik-package"></i><span>Extra</span></a>--}}
-{{--                    <div class="submenu-content">--}}
-{{--                        <a href="pages/ui/session-timeout.html" class="menu-item">Session Timeout</a>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
+
 {{--                <div class="nav-item">--}}
 {{--                    <a href="pages/ui/icons.html"><i class="ik ik-command"></i><span>Icons</span></a>--}}
 {{--                </div>--}}
@@ -95,16 +99,7 @@
 {{--                    <a href="pages/table-datatable.html"><i class="ik ik-inbox"></i><span>Data Table</span></a>--}}
 {{--                </div>--}}
 
-{{--                <div class="nav-lavel">Charts</div>--}}
-{{--                <div class="nav-item has-sub">--}}
-{{--                    <a href="#"><i class="ik ik-pie-chart"></i><span>Charts</span> <span class="badge badge-success">New</span></a>--}}
-{{--                    <div class="submenu-content">--}}
-{{--                        <a href="pages/charts-chartist.html" class="menu-item active">Chartist</a>--}}
-{{--                        <a href="pages/charts-flot.html" class="menu-item">Flot</a>--}}
-{{--                        <a href="pages/charts-knob.html" class="menu-item">Knob</a>--}}
-{{--                        <a href="pages/charts-amcharts.html" class="menu-item">Amcharts</a>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
+
 
 {{--                <div class="nav-lavel">Apps</div>--}}
 {{--                <div class="nav-item">--}}
@@ -155,12 +150,10 @@
 {{--                    <a href="javascript:void(0)"><i class="ik ik-award"></i><span>Sample Page</span></a>--}}
 {{--                </div>--}}
 {{--                <div class="nav-lavel">Support</div>--}}
-{{--                <div class="nav-item">--}}
-{{--                    <a href="javascript:void(0)"><i class="ik ik-monitor"></i><span>Documentation</span></a>--}}
-{{--                </div>--}}
-{{--                <div class="nav-item">--}}
-{{--                    <a href="javascript:void(0)"><i class="ik ik-help-circle"></i><span>Submit Issue</span></a>--}}
-{{--                </div>--}}
+
+                <div class="nav-item">
+                    <a href="javascript:void(0)"><i class="ik ik-help-circle"></i><span>Submit Issue</span></a>
+                </div>
             </nav>
         </div>
     </div>

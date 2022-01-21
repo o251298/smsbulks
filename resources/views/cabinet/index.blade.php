@@ -57,6 +57,11 @@ use Illuminate\Support\Facades\Auth;
                             <label for="exampleSelectGender">Имя отправителя</label>
                             <select class="form-control" name="originator">
                                 <option>Shop Zakaz</option>
+                                @if(isset($originators) && !empty($originators))
+                                    @foreach($originators->get() as $item)
+                                        <option>{{$item->originator}}</option>
+                                    @endforeach
+                                @endif
                             </select>
                         </div>
 

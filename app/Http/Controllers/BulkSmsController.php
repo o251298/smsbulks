@@ -20,10 +20,12 @@ class BulkSmsController extends Controller
 
     public function index()
     {
+        $originators = Auth::user()->originators()->where('status', '1');
         $group = Group::query();
         $group = $group->where('user_id', '=',Auth::id());
         return view('cabinet.bulk', [
-            'groups' => $group->get()
+            'groups' => $group->get(),
+            'originators' => $originators
         ]);
     }
 
