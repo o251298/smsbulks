@@ -2,6 +2,7 @@
 
 use App\Settings\SMPP;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SingleSmsController;
 use App\Http\Controllers\GroupController;
@@ -29,6 +30,7 @@ use App\Http\Controllers\PaymentController;
 */
 
 Route::get('/', function () {
+    Log::channel('payment')->info('success');
 return view('main');
 });
 
