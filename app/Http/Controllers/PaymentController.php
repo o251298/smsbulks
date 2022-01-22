@@ -20,8 +20,9 @@ class PaymentController extends Controller
 
     public function proccess()
     {
+        Log::channel('payment')->info('proccess');
+        Log::channel('payment')->info($_POST);
         $dataSet = $_POST;
-        Log::info($dataSet);
         if (empty($dataSet)){
             Log::info('Post is empty @Oleg');
             die();
