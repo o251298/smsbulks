@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\OriginatorController;
 use App\Http\Controllers\Admin\OriginatorController as AdminOriginatorController;
 use App\Http\Controllers\Admin\MessageController;
+use App\Http\Controllers\PaymentController;
 
 
 /*
@@ -54,6 +55,11 @@ Route::group([
     Route::get('/originator/create', [OriginatorController::class, 'create'])->name('originator.create');
     Route::post('/originator/store', [OriginatorController::class, 'store'])->name('originator.store');
     Route::get('/originators', [OriginatorController::class, 'index'])->name('originator.list');
+    Route::get('/payments', [PaymentController::class, 'index'])->name('payments.list');
+    Route::get('/payment-interkassa', [PaymentController::class, 'interkassa'])->name('payments.interkassa');
+    Route::get('/payment-interkassa/success', [PaymentController::class, 'success'])->name('payments.interkassa.success');
+    Route::get('/payment-interkassa/error', [PaymentController::class, 'error'])->name('payments.interkassa.error');
+    Route::post('/payment-interkassa/proccess', [PaymentController::class, 'proccess'])->name('payments.interkassa.proccess');
 });
 Route::group([
     'middleware' => ['auth', 'admin'],
