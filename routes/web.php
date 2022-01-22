@@ -61,7 +61,7 @@ Route::group([
     Route::get('/payment-interkassa', [PaymentController::class, 'interkassa'])->name('payments.interkassa');
     Route::get('/payment-interkassa/success', [PaymentController::class, 'success'])->name('payments.interkassa.success');
     Route::get('/payment-interkassa/error', [PaymentController::class, 'error'])->name('payments.interkassa.error');
-    Route::post('/payment-interkassa/proccess', [PaymentController::class, 'proccess'])->name('payments.interkassa.proccess');
+    Route::get('/payment-interkassa/proccess', [PaymentController::class, 'proccess'])->name('payments.interkassa.proccess');
 });
 Route::group([
     'middleware' => ['auth', 'admin'],
