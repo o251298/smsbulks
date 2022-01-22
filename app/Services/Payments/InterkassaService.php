@@ -30,7 +30,7 @@ class InterkassaService
         array_push($dataSet, $this->test_key);
         $signString = implode(':', $dataSet);
         $sign = base64_encode(hash('sha256', $signString, true));
-        Log::info($sign);
+        Log::channel('payment')->info($sign);
         $this->sign = $sign;
     }
 
@@ -45,10 +45,10 @@ class InterkassaService
     public function save()
     {
         if ($this->check()){
-            Log::info('success');
-            Log::info($this->dataSet['ik_am']);
+            Log::channel('payment')->info('success');
+            Log::channel('payment')->info($this->dataSet['ik_am']);
         } else {
-            Log::info('error pay');
+            Log::channel('payment')->info('error pay');
         }
     }
 }
