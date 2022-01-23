@@ -50,7 +50,7 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['single', 'payment'],
+            'channels' => ['single', 'payment', 'payment_error', 'payment_success'],
             'ignore_exceptions' => true,
         ],
 
@@ -63,6 +63,16 @@ return [
         'payment' => [
             'driver' => 'single',
             'path' => storage_path('logs/payment.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+        ],
+        'payment_error' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/payment_error.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+        ],
+        'payment_success' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/payment_success.log'),
             'level' => env('LOG_LEVEL', 'debug'),
         ],
 
