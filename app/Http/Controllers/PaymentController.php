@@ -26,7 +26,6 @@ class PaymentController extends Controller
         array_push($dataSet, '6Wwqa9UJWkNaRQv8');
         $signString = implode(':', $dataSet);
         $sign = base64_encode(hash('sha256', $signString, true));
-        if($sign != $_POST['ik_sign']) Log::channel('payment')->info("Ошибка платежа");
         Log::channel('payment')->info($_POST['ik_x_login'] . " оплатил на сумму " . $_POST['ik_am']);
     }
 
