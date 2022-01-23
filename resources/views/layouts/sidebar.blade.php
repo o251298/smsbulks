@@ -1,14 +1,14 @@
 <div class="app-sidebar colored">
     <div class="sidebar-header">
         <a class="header-brand" href="/">
-            <span class="text">ThemeKit</span>
+            <span class="text">SmsBulks</span>
         </a>
     </div>
 
     <div class="sidebar-content">
         <div class="nav-container">
             <nav id="main-menu-navigation" class="navigation-main">
-                <div class="nav-lavel">Navigation</div>
+                <div class="nav-lavel">Навигация</div>
                 <div class="nav-item active">
                     <a href="/home"><i class="ik ik-bar-chart-2"></i><span>Главная</span></a>
                 </div>
@@ -30,12 +30,15 @@
                     <a href="{{route('reports.index')}}"><i class="ik ik-menu"></i><span>Отчет смс</span> <!--<span class="badge badge-success">New</span> --></a>
                 </div>
 
-                <div class="nav-item has-sub">
-                    <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>Пакеты</span> <span class="badge badge-danger">2+</span></a>
-                    <div class="submenu-content">
-                        <a href="{{route('balance.create')}}" class="menu-item">Создать пакет <span class="badge badge-success">New</span></a>
-                        <a href="{{route('balance.index')}}" class="menu-item">Список пакетов <span class="badge badge-success">New</span></a>
-                    </div>
+{{--                <div class="nav-item has-sub">--}}
+{{--                    <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>Пакеты</span> <span class="badge badge-danger">2+</span></a>--}}
+{{--                    <div class="submenu-content">--}}
+{{--                        <a href="{{route('balance.create')}}" class="menu-item">Создать пакет <span class="badge badge-success">New</span></a>--}}
+{{--                        <a href="{{route('balance.index')}}" class="menu-item">Список пакетов <span class="badge badge-success">New</span></a>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+                <div class="nav-item">
+                    <a href="{{route('payments.list')}}"><i class="ik ik-credit-card"></i><span>Оплата</span></a>
                 </div>
 
                 <div class="nav-item has-sub">
