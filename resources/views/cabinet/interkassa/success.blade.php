@@ -3,8 +3,8 @@
 @section('content')
     <div class="alert alert-success" role="alert">
         <h4 class="alert-heading">Успех!</h4>
-        <p>Уважаемый {{\Illuminate\Support\Facades\Auth::user()->email}}</p>
+        <p>Оплата прошла успешно</p>
         <hr>
-        <p class="mb-0">Оплата прошла успешно</p>
+        <p class="mb-0">Вашему менеджеру сейчас прийдет письмо и Вам зачислят деньги на счет.</p>
     </div>
 @endsection
