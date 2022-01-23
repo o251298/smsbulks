@@ -1,11 +1,9 @@
 @extends('layouts.master')
 @section('title', "Оплата")
 @section('content')
-    <form id="payment" name="payment" method="POST" action="https://sci.interkassa.com/" enctype="utf-8">
-        @csrf
-        <input type="hidden" name="s" value="6ILrVnps4D" />
-        <input type="text" name="ik_am"/>
-        <input type="hidden" name="ik_cur" value="uah"/>
-        <input type="submit" value="Pay">
+    <form method="POST" action="https://www.liqpay.ua/api/3/checkout" accept-charset="utf-8">
+        <input type="hidden" name="data" value="{{$data}}"/>
+        <input type="hidden" name="signature" value="{{$signature}}"/>
+        <input type="image" src="//static.liqpay.ua/buttons/p1ru.radius.png"/>
     </form>
 @endsection

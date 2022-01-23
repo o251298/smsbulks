@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Services\Payments\InterkassaService;
@@ -20,23 +19,24 @@ class PaymentController extends Controller
 
     public function proccess()
     {
-        Log::channel('payment')->info('proccess');
-        Log::channel('payment')->info($_POST);
         $dataSet = $_POST;
-        if (empty($dataSet)){
-            Log::info('Post is empty @Oleg');
-            die();
-        } else {
-            $inv = new InterkassaService($dataSet);
-            $inv->save();
-        }
+        Log::channel('payment')->info($dataSet);
+        unset($dataSet['ik_sign']);
+        ksort($dataSet, SORT_STRING);
+        array_push($dataSet, '6Wwqa9UJWkNaRQv8');
+        $signString = implode(':', $dataSet);
+        $sign = base64_encode(hash('sha256', $signString, true));
+        if($sign != $_POST['ik_sign']) Log::channel('payment')->info("Ошибка платежа");
+        Log::channel('payment')->info($_POST['ik_x_login'] . " оплатил на сумму " . $_POST['ik_am']);
     }
+
     public function success()
     {
-        echo 'success';
+        return view('cabinet.interkassa.success');
     }
+
     public function error()
     {
-        echo 'error';
+        return view('cabinet.interkassa.error');
     }
 }

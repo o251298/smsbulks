@@ -13,6 +13,9 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         'http://localhost/bulk/coast',
-        'https://smsbulks.ru/bulk/coast'
+        'https://smsbulks.ru/bulk/coast',
+        'https://smsbulks.ru/payment-interkassa/success',
+        'https://smsbulks.ru/payment-interkassa/error',
+        'https://smsbulks.ru/payment-interkassa/proccess'
     ];
 }
