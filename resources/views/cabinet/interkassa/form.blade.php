@@ -7,6 +7,7 @@
             <div class="card-body">
                 <form id="payment" name="payment" method="POST" action="https://sci.interkassa.com/" enctype="utf-8" class="forms-sample">
                     <input type="hidden" name="ik_x_login" value="{{\Illuminate\Support\Facades\Auth::user()->email}}">
+                    <input type="hidden" name="ik_x_id" value="{{\Illuminate\Support\Facades\Auth::id()}}">
                     <div class="form-group">
                         <label for="exampleInputUsername1">Сумма</label>
                         <input type="text" name="ik_am" class="form-control" placeholder="Введите сумму для оплаты">
