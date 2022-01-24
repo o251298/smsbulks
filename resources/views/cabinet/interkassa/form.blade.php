@@ -1,3 +1,6 @@
+<?php
+use Illuminate\Support\Facades\Auth;
+?>
 @extends('layouts.master')
 @section('title', "Оплата Interkassa")
 @section('content')
@@ -6,8 +9,9 @@
             <div class="card-header"><h3>Оплата через Interkassa</h3></div>
             <div class="card-body">
                 <form id="payment" name="payment" method="POST" action="https://sci.interkassa.com/" enctype="utf-8" class="forms-sample">
-                    <input type="hidden" name="ik_x_login" value="{{\Illuminate\Support\Facades\Auth::user()->email}}">
-                    <input type="hidden" name="ik_x_id" value="{{\Illuminate\Support\Facades\Auth::id()}}">
+                    <input type="hidden" name="ik_x_login" value="{{Auth::user()->email}}">
+                    <input type="hidden" name="ik_x_id" value="{{Auth::id()}}">
+                    <input type="hidden" name="ik_x_wallet" value="{{Auth::user()->getWallet()->first()['id']}}">
                     <div class="form-group">
                         <label for="exampleInputUsername1">Сумма</label>
                         <input type="text" name="ik_am" class="form-control" placeholder="Введите сумму для оплаты">

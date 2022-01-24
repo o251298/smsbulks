@@ -35,6 +35,8 @@ class PaymentController extends Controller
                 'sum' => $dataSet['ik_am'],
                 'currency' => $dataSet['ik_cur'],
                 'data_pay' => $dataSet['ik_inv_prc'],
+                'wallet_id' => $dataSet['ik_x_wallet'],
+                'status_wallet' => 0,
             ]);
             Log::channel('payment')->info($pay);
         }
