@@ -33,6 +33,9 @@
                         <a href="{{route('admin.originators')}}" class="menu-item">Альфа имена заявки</a>
                     </div>
                 </div>
+                <div class="nav-item">
+                    <a href="{{route('admin.payments')}}"><i class="ik ik-credit-card"></i><span>Оплаты</span></a>
+                </div>
 {{--                <div class="nav-item">--}}
 {{--                    <a href="{{route('reports.index')}}"><i class="ik ik-menu"></i><span>Отчет смс</span> <!--<span class="badge badge-success">New</span> --></a>--}}
 {{--                </div>--}}

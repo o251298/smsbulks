@@ -1,5 +1,6 @@
 <?php
 use Illuminate\Support\Facades\Auth;
+
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
@@ -43,7 +44,7 @@ use Illuminate\Support\Facades\Auth;
                 <div class="top-menu d-flex align-items-center">
                     <button type="button" class="btn-icon mobile-nav-toggle d-lg-none"><span></span></button>
 {{--                    <button type="button" id="navbar-fullscreen" class="nav-link"><i class="ik ik-maximize"></i></button>--}}
-                    <p style="padding: 5px">Ваш баланс @if(Auth::user()->getBalance()) <strong>{{Auth::user()->getBalance()->current_sum}}</strong> @else <strong>0</strong> @endif грн</p>
+                    <p style="padding: 5px">Ваш баланс @if(Auth::user()->getWallet()->first()) <strong>{{Auth::user()->getWallet()->first()['current_sum']}}</strong> @else <strong>0</strong> @endif грн</p>
                 </div>
                 <div class="top-menu d-flex align-items-center">
                     <div class="dropdown">

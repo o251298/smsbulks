@@ -16,7 +16,8 @@ use App\Http\Controllers\OriginatorController;
 use App\Http\Controllers\Admin\OriginatorController as AdminOriginatorController;
 use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\PaymentController;
-
+use App\Http\Controllers\Admin\PaymentController as AdminPaymentController;
+use App\Http\Controllers\Admin\WalletController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +31,6 @@ use App\Http\Controllers\PaymentController;
 */
 
 Route::get('/', function () {
-    Log::channel('payment')->info('success');
 return view('main');
 });
 
@@ -49,10 +49,6 @@ Route::group([
     Route::post('/groups/store', [GroupController::class, 'store'])->name('groups.store');
     Route::get('/groups/{id}', [GroupController::class, 'view'])->name('groups.view');
     Route::get('/reports', [Reports::class, 'index'])->name('reports.index');
-    Route::get('/balance', [BalanceController::class, 'create'])->name('balance.create');
-    Route::get('/balance/list', [BalanceController::class, 'index'])->name('balance.index');
-    Route::get('/balance/destroy/{id}', [BalanceController::class, 'destroy'])->name('balance.destroy');
-    Route::post('/balance/store', [BalanceController::class, 'store'])->name('balance.store');
 
     Route::get('/originator/create', [OriginatorController::class, 'create'])->name('originator.create');
     Route::post('/originator/store', [OriginatorController::class, 'store'])->name('originator.store');
@@ -72,6 +68,12 @@ Route::group([
     Route::get('/originators/activate/{originator}', [AdminOriginatorController::class, 'activate'])->name('admin.originators.activate');
     Route::get('/originators/deactivate/{originator}', [AdminOriginatorController::class, 'deactivate'])->name('admin.originators.deactivate');
     Route::get('/messages', [MessageController::class, 'index'])->name('admin.messages');
+    Route::get('/payments', [AdminPaymentController::class, 'index'])->name('admin.payments');
+//    Route::get('/balance', [BalanceController::class, 'create'])->name('balance.create');
+//    Route::get('/balance/list', [BalanceController::class, 'index'])->name('balance.index');
+//    Route::get('/balance/destroy/{id}', [BalanceController::class, 'destroy'])->name('balance.destroy');
+//    Route::post('/balance/store', [BalanceController::class, 'store'])->name('balance.store');
+    Route::post('/wallet/store', [WalletController::class, 'store'])->name('admin.wallet.store');
 });
 Route::any('/payment-interkassa/success', [PaymentController::class, 'success'])->name('payments.interkassa.success');
 Route::any('/payment-interkassa/error', [PaymentController::class, 'error'])->name('payments.interkassa.error');

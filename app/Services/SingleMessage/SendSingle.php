@@ -4,6 +4,7 @@
 namespace App\Services\SingleMessage;
 use App\Models\Balance;
 use App\Models\Message;
+use App\Models\Wallet;
 use Illuminate\Support\Facades\Auth;
 use App\Services\API\SetDataMessage;
 use App\Services\API\APITransceiver;
@@ -80,7 +81,8 @@ class SendSingle
             dump('false');
             return false;
         }
-        Balance::payMessage($this->part, Message::PRICE);
+        //Balance::payMessage($this->part, Message::PRICE);
+        Wallet::payMessage($this->part, Message::PRICE);
         return true;
     }
 

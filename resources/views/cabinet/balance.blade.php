@@ -15,6 +15,13 @@
                 <div class="card-body">
                     <form class="forms-sample" enctype="multipart/form-data" method="post" action="{{route('balance.store')}}">
                         @csrf
+
+                        <select name="user_id" id="">
+                            @foreach($users as $item)
+                                <option value="{{$item->id}}">{{$item->name}}</option>
+                            @endforeach
+                        </select>
+
                         <div class="form-group">
                             <label for="exampleSelectGender">Сумма</label>
                             <input type="text" class="form-control" name="total_sum">

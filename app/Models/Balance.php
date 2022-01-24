@@ -19,4 +19,5 @@ class Balance extends Model
         $balance->current_sum = $balance->current_sum - $priceForMessage;
         $balance->save();
     }
+
 }

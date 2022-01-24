@@ -51,7 +51,7 @@ class User extends Authenticatable
 
     public function getBalance()
     {
-        $balance = $this->balance()->first();
+        $balance = $this->getWallet()->first();
         return $balance;
     }
 
@@ -75,5 +75,15 @@ class User extends Authenticatable
     public function originators()
     {
         return $this->belongsToMany(Originator::class, 'originator_user');
+    }
+
+    public function wallet()
+    {
+        return $this->hasOne(Wallet::class);
+    }
+
+    public function getWallet()
+    {
+        return $this->hasOne(Wallet::class, 'user_id', 'id');
     }
 }
