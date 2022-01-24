@@ -17,3 +17,19 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::get('/register', function (){
+    $data = ['data' => 'register_success'];
+    return response()->json($data, 200);
+});
+Route::get('/originator', function (){
+    $data = ['data' => 'originator_success'];
+    return response()->json($data, 200);
+});
+Route::get('/balance', function (){
+    $data = ['data' => 'balance_success'];
+    return response()->json($data, 200);
+});
+Route::get('/message/send', function (){
+    $data = ['data' => 'message_send_success'];
+    return response()->json($data, 200);
+});
