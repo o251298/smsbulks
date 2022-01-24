@@ -20,10 +20,10 @@
                 </div>
 
                 <div class="nav-item has-sub">
-                    <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>Базы номеров</span> <span class="badge badge-danger">2+</span></a>
+                    <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>Базы номеров</span> <!-- <span class="badge badge-danger">2+</span> --></a>
                     <div class="submenu-content">
-                        <a href="{{route('groups.index')}}" class="menu-item">База номеров <span class="badge badge-success">New</span></a>
-                        <a href="{{route('groups.create')}}" class="menu-item">Создать базу <span class="badge badge-success">New</span></a>
+                        <a href="{{route('groups.index')}}" class="menu-item">База номеров</a>
+                        <a href="{{route('groups.create')}}" class="menu-item">Создать базу</a>
                     </div>
                 </div>
                 <div class="nav-item">
@@ -38,11 +38,11 @@
 {{--                    </div>--}}
 {{--                </div>--}}
                 <div class="nav-item">
-                    <a href="{{route('payments.list')}}"><i class="ik ik-credit-card"></i><span>Оплата</span></a>
+                    <a href="{{route('payments.list')}}"><i class="ik ik-credit-card"></i><span>Оплата</span> <span class="badge badge-success">New</span></a>
                 </div>
 
                 <div class="nav-item has-sub">
-                    <a href="#"><i class="ik ik-box"></i><span>Альфа имена</span><span class="badge badge-success">New</span></a>
+                    <a href="#"><i class="ik ik-box"></i><span>Альфа имена</span></a>
                     <div class="submenu-content">
                         <a href="{{route('originator.create')}}" class="menu-item">Создать</a>
                     </div>

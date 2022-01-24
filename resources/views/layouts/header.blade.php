@@ -48,22 +48,22 @@ use Illuminate\Support\Facades\Auth;
                 </div>
                 <div class="top-menu d-flex align-items-center">
                     <div class="dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="notiDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="ik ik-bell"></i><span class="badge bg-danger">3</span></a>
+                        <a class="nav-link dropdown-toggle" href="#" id="notiDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="ik ik-bell"></i><span class="badge bg-danger">2</span></a>
                         <div class="dropdown-menu dropdown-menu-right notification-dropdown" aria-labelledby="notiDropdown">
                             <h4 class="header">Уведомления</h4>
                             <div class="notifications-wrap">
                                 <a href="#" class="media">
                                     <span class="d-flex"><i class="ik ik-check"></i></span>
                                     <span class="media-body">
-                                        <span class="heading-font-family media-heading">Смс</span>
-                                        <span class="media-content">Оптимизирована работа передачи смс</span>
+                                        <span class="heading-font-family media-heading">Оплата</span>
+                                        <span class="media-content">Добавлена возможность оплаты через InterKassa</span>
                                     </span>
                                 </a>
                                 <a href="#" class="media">
                                     <span class="d-flex"><i class="ik ik-check"></i></span>
                                     <span class="media-body">
-                                        <span class="heading-font-family media-heading">Альфа имена</span>
-                                        <span class="media-content">Добавлена возможность регистрировать АИ</span>
+                                        <span class="heading-font-family media-heading">API</span>
+                                        <span class="media-content">Идет разработка API подключения</span>
                                     </span>
                                 </a>
                             </div>
