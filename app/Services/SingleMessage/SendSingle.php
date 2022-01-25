@@ -18,6 +18,7 @@ class SendSingle
     public $part;
     public $pay;
     public $response;
+    public $messageId = 0;
 
     public function __construct($request, $bulk = null)
     {
@@ -104,6 +105,8 @@ class SendSingle
                     'aggregator_id' => 1,
                     'provider_id' => $test[$phone],
                 ]);
+                // for API request
+                $this->messageId = $message->id;
                 return $transceiver->checkResponse();
             }
             return $transceiver->checkResponse();

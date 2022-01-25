@@ -28,4 +28,9 @@ HomeController extends Controller
     {
         return view('home');
     }
+
+    public function documentation()
+    {
+        return view('cabinet.api-documentation');
+    }
 }

@@ -22,6 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'api_token',
     ];
     const AdminENCR = 'A-r&SQ-a';
     const UserENCR = 'U-r&RQ-u';
@@ -85,5 +86,15 @@ class User extends Authenticatable
     public function getWallet()
     {
         return $this->hasOne(Wallet::class, 'user_id', 'id');
+    }
+
+    public static function getByToken($token)
+    {
+        $user = self::where('api_token', $token);
+        if (!$user){
+            throw new \Exception("User is not fined");
+            return false;
+        }
+        return $user->first();
     }
 }

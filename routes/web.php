@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\Admin\PaymentController as AdminPaymentController;
 use App\Http\Controllers\Admin\WalletController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +36,7 @@ return view('main');
 });
 
 Auth::routes();
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('user');
+Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('user');
 Route::group([
     'middleware'  => ['auth', 'user']
 ], function (){
@@ -49,6 +50,7 @@ Route::group([
     Route::post('/groups/store', [GroupController::class, 'store'])->name('groups.store');
     Route::get('/groups/{id}', [GroupController::class, 'view'])->name('groups.view');
     Route::get('/reports', [Reports::class, 'index'])->name('reports.index');
+    Route::get('/api-documentation', [HomeController::class, 'documentation'])->name('documentation');
 
     Route::get('/originator/create', [OriginatorController::class, 'create'])->name('originator.create');
     Route::post('/originator/store', [OriginatorController::class, 'store'])->name('originator.store');

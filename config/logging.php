@@ -50,7 +50,7 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['single', 'payment', 'payment_error', 'payment_success', 'invite'],
+            'channels' => ['single', 'payment', 'payment_error', 'payment_success', 'invite', 'registers', 'apiSend'],
             'ignore_exceptions' => false,
         ],
 
@@ -78,6 +78,16 @@ return [
         'invite' => [
             'driver' => 'single',
             'path' => storage_path('logs/invite.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+        ],
+        'registers' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/registers.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+        ],
+        'apiSend' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/apiSend.log'),
             'level' => env('LOG_LEVEL', 'debug'),
         ],
 
