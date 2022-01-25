@@ -47,6 +47,12 @@
                         <a href="{{route('originator.create')}}" class="menu-item">Создать</a>
                     </div>
                 </div>
+                {{--                <div class="nav-item has-sub">--}}
+                {{--                    <a href="#"><i class="ik ik-package"></i><span>Extra</span></a>--}}
+                {{--                    <div class="submenu-content">--}}
+                {{--                        <a href="pages/ui/session-timeout.html" class="menu-item">Session Timeout</a>--}}
+                {{--                    </div>--}}
+                {{--                </div>--}}
 {{--                <div class="nav-item has-sub">--}}
 {{--                    <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>Widgets</span> <span class="badge badge-danger">150+</span></a>--}}
 {{--                    <div class="submenu-content">--}}
@@ -109,13 +115,13 @@
 {{--                    </div>--}}
 {{--                </div>--}}
 
-{{--                <div class="nav-lavel">Apps</div>--}}
+                <div class="nav-lavel">Дополнительно</div>
 {{--                <div class="nav-item">--}}
 {{--                    <a href="pages/calendar.html"><i class="ik ik-calendar"></i><span>Calendar</span></a>--}}
 {{--                </div>--}}
-{{--                <div class="nav-item">--}}
-{{--                    <a href="pages/taskboard.html"><i class="ik ik-server"></i><span>Taskboard</span></a>--}}
-{{--                </div>--}}
+                <div class="nav-item">
+                    <a href="{{route('documentation')}}"><i class="ik ik-server"></i><span>API документация</span></a>
+                </div>
 
 {{--                <div class="nav-lavel">Pages</div>--}}
 

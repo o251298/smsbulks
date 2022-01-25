@@ -6,7 +6,7 @@
         <h5 class="card-title">Адрес службы</h5>
             <div class="card" style="background: #0b0b0b; color: #4ABF60; font-size:17px">
                 <div class="card-body">
-                    http://localhost/api/message-send
+                    https://smsbulks.ru/api/message-send
                 </div>
             </div>
             <ul class="nav nav-tabs" id="myTab" role="tablist">
