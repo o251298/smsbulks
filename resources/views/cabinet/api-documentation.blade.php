@@ -1,5 +1,18 @@
+<?php
+use Illuminate\Support\Facades\Auth;
+?>
 @extends('layouts.master')
 @section('content')
+    @if(Auth::user()->api_token != null)
+        <div class="card" style="background: #1a1e21">
+            <div class="card-header" style="color: #4ABF60; font-size: 15px; font-weight: bold">
+                Bear token
+            </div>
+            <div class="card-body">
+                <p class="card-text" style="color: #4ABF60; font-weight: lighter">{{Auth::user()->api_token}}</p>
+            </div>
+        </div>
+    @endif
 <div class="card">
     <h5 class="card-header">Отправка смс</h5>
         <div class="card-body">
