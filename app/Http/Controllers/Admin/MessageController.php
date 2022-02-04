@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Message;
+use App\Models\User;
+use App\Services\Other\Message\Filter;
+use App\Services\SingleMessage\SendSingle;
 use Illuminate\Http\Request;
 
 class MessageController extends Controller
@@ -13,11 +16,23 @@ class MessageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $message = Message::paginate(20);
+        $count = 20;
+        $message = Message::query();
+        try {
+            if (!empty($request->all())){
+                $message = new Filter($request, $message);
+                $message = $message->filter();
+            }
+        } catch (\Exception $exception){
+            return redirect()->back()->with('error', $exception->getMessage());
+        }
+        if (!empty($request->count)){
+            $count = $request->count;
+        }
         return view('admin.messages.index' , [
-            'messages' => $message
+            'messages' => $message->paginate($count)->withQueryString()
         ]);
     }
 
@@ -85,5 +100,34 @@ class MessageController extends Controller
     public function destroy(Message $message)
     {
         //
+    }
+
+    public function moderation()
+    {
+        $message = Message::where('provider_id', 'moderation');
+        return view('admin.messages.moderation' , [
+            'messages' => $message->get()
+        ]);
+    }
+
+    public function pass(Request $request)
+    {
+        if ($request->pass){
+            // отправка смс
+            $ids = $request->message_id;
+            foreach ($ids as $item){
+                $message = Message::find($item);
+                $msg = new SendSingle($request, null, $message);
+                $msg->moderationSend();
+            }
+        } elseif($request->block) {
+            $ids = $request->message_id;
+            foreach ($ids as $item){
+                $message = Message::find($item);
+                $message->provider_id = 0;
+                $message->save();
+            }
+        }
+        return redirect()->back();
     }
 }

@@ -137,4 +137,10 @@ class Message extends Model
         $conversion = $success * 100/$all;
         return round($conversion, 2);
     }
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
+
+
 }

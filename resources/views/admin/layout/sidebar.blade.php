@@ -15,9 +15,9 @@
                     <a href="{{route('admin')}}"><i class="ik ik-monitor"></i><span>Статистика</span></a>
                 </div>
                 <div class="nav-item has-sub">
-                    <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>Пользователи</span> <span class="badge badge-danger">2+</span></a>
+                    <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>Пользователи</span></a>
                     <div class="submenu-content">
-                        <a href="{{route('admin.users')}}" class="menu-item">Список пользователей<span class="badge badge-success">New</span></a>
+                        <a href="{{route('admin.users')}}" class="menu-item">Список пользователей</a>
                     </div>
                 </div>
 
@@ -25,6 +25,9 @@
                     <a href="#"><i class="ik ik-package"></i><span>Рассылки смс</span> <span class="badge badge-success">DEV</span></a>
                     <div class="submenu-content">
                         <a href="{{route('admin.messages')}}" class="menu-item">Все смс</a>
+                    </div>
+                    <div class="submenu-content">
+                        <a href="{{route('admin.moderation')}}" class="menu-item">Модерация смс</a>
                     </div>
                 </div>
                 <div class="nav-item has-sub">
@@ -48,15 +51,13 @@
 {{--                    </div>--}}
 {{--                </div>--}}
 
-{{--                <div class="nav-item has-sub">--}}
-{{--                    <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>Widgets</span> <span class="badge badge-danger">150+</span></a>--}}
-{{--                    <div class="submenu-content">--}}
-{{--                        <a href="pages/widgets.html" class="menu-item">Basic</a>--}}
-{{--                        <a href="pages/widget-statistic.html" class="menu-item">Statistic</a>--}}
-{{--                        <a href="pages/widget-data.html" class="menu-item">Data</a>--}}
-{{--                        <a href="pages/widget-chart.html" class="menu-item">Chart Widget</a>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
+                <div class="nav-item has-sub">
+                    <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>Стоп фразы</span></a>
+                    <div class="submenu-content">
+                        <a href="{{route('admin.badword.create')}}" class="menu-item">Создать плохое слово</a>
+                        <a href="{{route('admin.badword')}}" class="menu-item">Список</a>
+                    </div>
+                </div>
 {{--                <div class="nav-lavel">UI Element</div>--}}
 {{--                <div class="nav-item has-sub">--}}
 {{--                    <a href="#"><i class="ik ik-box"></i><span>Basic</span></a>--}}

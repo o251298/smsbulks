@@ -5,6 +5,7 @@ namespace App\Services\SingleMessage;
 use App\Models\Balance;
 use App\Models\Message;
 use App\Models\Wallet;
+use App\Services\Other\Moderation\Censorship;
 use Illuminate\Support\Facades\Auth;
 use App\Services\API\SetDataMessage;
 use App\Services\API\APITransceiver;
@@ -19,16 +20,22 @@ class SendSingle
     public $pay;
     public $response;
     public $messageId = 0;
+    public $moder_message;
 
-    public function __construct($request, $bulk = null)
+
+    public function __construct($request, $bulk = null, $message = null)
     {
-        $this->request = $request;
-        $this->validatePart();
-        if ($bulk !== null){
-            $this->bulk = $bulk;
-            $this->payBulk();
+        if ($message == null){
+            $this->request = $request;
+            $this->validatePart();
+            if ($bulk !== null){
+                $this->bulk = $bulk;
+                $this->payBulk();
+            } else {
+                $this->pay();
+            }
         } else {
-            $this->pay();
+            $this->moder_message = $message;
         }
     }
 
@@ -90,6 +97,22 @@ class SendSingle
     public function sendMessage($phone)
     {
             $data = new SetDataMessage($this->request->text, $this->request->originator, $phone);
+            // ================================================
+            $censor = new Censorship();
+            if ($censor->filter($this->request->text)){
+                $message = Message::create([
+                    'user_id' => Auth::id(),
+                    'number' => $phone,
+                    'originator' => $this->request->originator,
+                    'text' => $this->request->text,
+                    'status' => 0,
+                    'aggregator_id' => 1,
+                    'provider_id' => 'moderation',
+                ]);
+                $this->messageId = $message->id;
+                return ['success_request' => $message->id];
+            }
+            // =================================================
             $transceiver = new APITransceiver($data->data(), $this->dataConnect());
             $this->response = $transceiver->checkResponse();
 
@@ -118,6 +141,21 @@ class SendSingle
             'token' => 'EevnBT8XkJe2spKz9QTb1suUlrjcDytT'
         ];
         return $data;
+    }
+
+    public function moderationSend()
+    {
+        $data = new SetDataMessage($this->moder_message->text, $this->moder_message->originator, $this->moder_message->number);
+        $transceiver = new APITransceiver($data->data(), $this->dataConnect());
+        $this->response = $transceiver->checkResponse();
+        if (array_key_exists('success_request', $this->response)) {
+            $res = $this->response['success_request'];
+            $test = $res['info']['phone_id_status'];
+            $this->moder_message->provider_id = "-" . $test[$this->moder_message->number];
+            $this->moder_message->save();
+            return $transceiver->checkResponse();
+        }
+        return $transceiver->checkResponse();
     }
 
 

@@ -30,6 +30,10 @@ use App\Http\Controllers\HomeController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// 1234 5 6 78
+
+
+
 
 Route::get('/', function () {
 return view('main');
@@ -69,8 +73,15 @@ Route::group([
     Route::get('/originators', [AdminOriginatorController::class, 'index'])->name('admin.originators');
     Route::get('/originators/activate/{originator}', [AdminOriginatorController::class, 'activate'])->name('admin.originators.activate');
     Route::get('/originators/deactivate/{originator}', [AdminOriginatorController::class, 'deactivate'])->name('admin.originators.deactivate');
-    Route::get('/messages', [MessageController::class, 'index'])->name('admin.messages');
+    Route::any('/messages', [MessageController::class, 'index'])->name('admin.messages');
+    Route::get('/messages/moderation', [MessageController::class, 'moderation'])->name('admin.moderation');
+    Route::post('/messages/moderation/block', [MessageController::class, 'block'])->name('admin.moderation.block');
+    Route::post('/messages/moderation/pass', [MessageController::class, 'pass'])->name('admin.moderation.pass');
     Route::get('/payments', [AdminPaymentController::class, 'index'])->name('admin.payments');
+    Route::get('/bad-word/list', [\App\Http\Controllers\Admin\BadWordController::class, 'index'])->name('admin.badword');
+    Route::get('/bad-word/create', [\App\Http\Controllers\Admin\BadWordController::class, 'create'])->name('admin.badword.create');
+    Route::post('/bad-word/store', [\App\Http\Controllers\Admin\BadWordController::class, 'store'])->name('admin.badword.store');
+    Route::get('/bad-word/destroy/{badWord}', [\App\Http\Controllers\Admin\BadWordController::class, 'destroy'])->name('admin.badword.destroy');
 //    Route::get('/balance', [BalanceController::class, 'create'])->name('balance.create');
 //    Route::get('/balance/list', [BalanceController::class, 'index'])->name('balance.index');
 //    Route::get('/balance/destroy/{id}', [BalanceController::class, 'destroy'])->name('balance.destroy');

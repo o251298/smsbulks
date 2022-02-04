@@ -28,7 +28,10 @@ use Illuminate\Support\Facades\Auth;
     <link rel="stylesheet" href="{{asset('template/plugins/owl.carousel/dist/assets/owl.carousel.min.css')}}">
     <link rel="stylesheet" href="{{asset('template/plugins/owl.carousel/dist/assets/owl.theme.default.min.css')}}">
     <link rel="stylesheet" href="{{asset('template/dist/css/theme.min.css')}}">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
     <script src="{{asset('/template/src/js/vendor/modernizr-2.8.3.min.js')}}"></script>
+
 </head>
 
 <body>
