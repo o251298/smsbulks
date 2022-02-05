@@ -48,15 +48,15 @@ use Illuminate\Support\Facades\Auth;
                 </div>
                 <div class="top-menu d-flex align-items-center">
                     <div class="dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="notiDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="ik ik-bell"></i><span class="badge bg-danger">2</span></a>
+                        <a class="nav-link dropdown-toggle" href="#" id="notiDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="ik ik-bell"></i><span class="badge bg-danger">3</span></a>
                         <div class="dropdown-menu dropdown-menu-right notification-dropdown" aria-labelledby="notiDropdown">
                             <h4 class="header">Уведомления</h4>
                             <div class="notifications-wrap">
                                 <a href="#" class="media">
                                     <span class="d-flex"><i class="ik ik-check"></i></span>
                                     <span class="media-body">
-                                        <span class="heading-font-family media-heading">Оплата</span>
-                                        <span class="media-content">Добавлена возможность оплаты через InterKassa</span>
+                                        <span class="heading-font-family media-heading">Оптимизация загрузки "Базы номеров"</span>
+                                        <span class="media-content">По сколько номера в "Базе номеров" иногда достигают 10 тисяч, было принято решение использовать механизм работы очередей, теперь Вам не нужно ждать минуты в браузере пока закончится загрузка, номера автоматически загрузяться в течении 10 -15 минут (для баз больше 5к номеров) </span>
                                     </span>
                                 </a>
                                 <a href="#" class="media">
@@ -64,6 +64,13 @@ use Illuminate\Support\Facades\Auth;
                                     <span class="media-body">
                                         <span class="heading-font-family media-heading">API</span>
                                         <span class="media-content">Идет разработка API подключения</span>
+                                    </span>
+                                </a>
+                                <a href="#" class="media">
+                                    <span class="d-flex"><i class="ik ik-check"></i></span>
+                                    <span class="media-body">
+                                        <span class="heading-font-family media-heading">Оптимизация отправок смс</span>
+                                        <span class="media-content">Одиночные смс будут отправляться незамедлительно, по сколько являются транзакционными сообщениями, которые должны доставляться мгновенно. Сообщения массового характера становятся в очередь и будут отправлятся почастям, что бы разгрузить операторов</span>
                                     </span>
                                 </a>
                             </div>

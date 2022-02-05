@@ -4,6 +4,7 @@
 namespace App\Services;
 
 
+use App\Jobs\GroupSave;
 use App\Models\Number;
 
 class GroupParser
@@ -78,12 +79,7 @@ class GroupParser
 
     public function save($numbers_uniq)
     {
-        foreach ($numbers_uniq as $item){
-            $message = Number::create([
-                'group_id' => $this->groupid,
-                'number' => $item,
-            ]);
-        }
+        GroupSave::dispatch($numbers_uniq, $this->groupid)->onQueue("low");
     }
 
     public function setInfo($info)

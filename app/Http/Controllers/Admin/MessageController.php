@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Services\Other\Message\Filter;
 use App\Services\SingleMessage\SendSingle;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MessageController extends Controller
 {
@@ -113,11 +114,16 @@ class MessageController extends Controller
     public function pass(Request $request)
     {
         if ($request->pass){
+            $req = array(
+                'text' => $request->text,
+                'originator' => $request->originator,
+                'number' => $request->phone
+            );
             // отправка смс
             $ids = $request->message_id;
             foreach ($ids as $item){
                 $message = Message::find($item);
-                $msg = new SendSingle($request, null, $message);
+                $msg = new SendSingle($req, null, $message, Auth::id());
                 $msg->moderationSend();
             }
         } elseif($request->block) {

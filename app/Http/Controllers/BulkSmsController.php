@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\SendMessage;
 use App\Models\Balance;
 use App\Models\Group;
 use App\Models\Message;
@@ -31,22 +32,22 @@ class BulkSmsController extends Controller
 
     public function store(SendMessageRequest $request)
     {
+        $req = array(
+            'text' => $request->text,
+            'originator' => $request->originator,
+            'number' => $request->group
+        );
+
         $group = Group::find($request->group);
         $numbers = $group->numbers();
 
-        $sms = new SendSingle($request, $numbers->count());
+
+        $sms = new SendSingle($req, $numbers->count(), null, Auth::id());
         if ($error = $sms->getError()){
             return redirect()->back()->with(array_key_first($error), $error[array_key_first($error)]);
         }
         $sms->payMassage();
-        $not_success = 0;
-        foreach ($numbers->get() as $item){
-            $status = $sms->sendMessage($item->number);
-            if (array_key_exists('error_request', $status)){
-                $not_success++;
-            }
-        }
-        if ($not_success > 0) return redirect()->back()->with('success_single_sms', 'Смс ушпешно отправлено но было не успешные отправки' . $not_success);
+        SendMessage::dispatch($numbers, $sms)->onQueue("medium");
         return redirect()->back()->with('success_single_sms', 'Смс ушпешно отправлено');
     }
 

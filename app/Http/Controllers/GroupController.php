@@ -45,7 +45,7 @@ class GroupController extends Controller
         Storage::delete($path);
         $info = $test->getInfo();
 
-        return redirect()->back()->with('success', "База загрузилась, всего номеров {$info['all']} , удалено дублей: {$info['double']}");
+        return redirect()->back()->with('success', "База в очереди на загрузку, всего номеров {$info['all']} , удалено дублей: {$info['double']}");
     }
 
     public function view($id)

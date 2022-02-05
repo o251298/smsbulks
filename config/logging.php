@@ -50,7 +50,7 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['single', 'payment', 'payment_error', 'payment_success', 'invite', 'registers', 'apiSend'],
+            'channels' => ['single', 'payment', 'payment_error', 'payment_success', 'invite', 'registers', 'apiSend', 'fakeApiSend'],
             'ignore_exceptions' => false,
         ],
 
@@ -91,6 +91,11 @@ return [
             'level' => env('LOG_LEVEL', 'debug'),
         ],
 
+        'fakeApiSend' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/FakeApiSend.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+        ],
         'daily' => [
             'driver' => 'daily',
             'path' => storage_path('logs/laravel.log'),

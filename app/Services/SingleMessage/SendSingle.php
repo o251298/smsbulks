@@ -21,10 +21,13 @@ class SendSingle
     public $response;
     public $messageId = 0;
     public $moder_message;
+    public $user_id;
 
 
-    public function __construct($request, $bulk = null, $message = null)
+    public function __construct($request, $bulk = null, $message = null, $user_id)
     {
+
+        $this->user_id = $user_id;
         if ($message == null){
             $this->request = $request;
             $this->validatePart();
@@ -37,11 +40,12 @@ class SendSingle
         } else {
             $this->moder_message = $message;
         }
+
     }
 
     public function validatePart()
     {
-        $part = Message::validatePart($this->request->text);
+        $part = Message::validatePart($this->request['text']);
         if ($part == 0){
             $this->error = [
                 'too_many_parts_in_message' => 'Ошибка отправления, слишком много частей, разрешается 4'
@@ -54,7 +58,8 @@ class SendSingle
 
     public function pay()
     {
-        $pay = 0.36 * $this->part;
+        $price = Message::PRICE;
+        $pay = $price * $this->part;
         if (Auth::user()->getBalance()->current_sum < $pay){
             $this->error = [
                 'not_has_money' => 'Ошибка отправления, недостаточно денег для отправки ' . $this->part . 'х частей'
@@ -67,7 +72,8 @@ class SendSingle
 
     public function payBulk()
     {
-        $pay = 0.36 * $this->part * $this->bulk;
+        $price = Message::PRICE;
+        $pay = $price * $this->part * $this->bulk;
         if (Auth::user()->getBalance()->current_sum < $pay){
             $this->error = [
                 'not_has_money' => 'Ошибка отправления, недостаточно денег для отправки ' . $this->part . 'х частей'
@@ -90,21 +96,26 @@ class SendSingle
             return false;
         }
         //Balance::payMessage($this->part, Message::PRICE);
-        Wallet::payMessage($this->part, Message::PRICE);
+        if ($this->bulk != null){
+            Wallet::payMessage($this->part, Message::PRICE * $this->bulk);
+        } else {
+            Wallet::payMessage($this->part, Message::PRICE);
+        }
+
         return true;
     }
 
     public function sendMessage($phone)
     {
-            $data = new SetDataMessage($this->request->text, $this->request->originator, $phone);
+            $data = new SetDataMessage($this->request['text'], $this->request['originator'], $phone);
             // ================================================
             $censor = new Censorship();
-            if ($censor->filter($this->request->text)){
+            if ($censor->filter($this->request['text'])){
                 $message = Message::create([
-                    'user_id' => Auth::id(),
+                    'user_id' => $this->user_id,
                     'number' => $phone,
-                    'originator' => $this->request->originator,
-                    'text' => $this->request->text,
+                    'originator' => $this->request['originator'],
+                    'text' => $this->request['text'],
                     'status' => 0,
                     'aggregator_id' => 1,
                     'provider_id' => 'moderation',
@@ -120,10 +131,10 @@ class SendSingle
                 $res = $this->response['success_request'];
                 $test = $res['info']['phone_id_status'];
                 $message = Message::create([
-                    'user_id' => Auth::id(),
+                    'user_id' => $this->user_id,
                     'number' => $phone,
-                    'originator' => $this->request->originator,
-                    'text' => $this->request->text,
+                    'originator' => $this->request['originator'],
+                    'text' => $this->request['text'],
                     'status' => 0,
                     'aggregator_id' => 1,
                     'provider_id' => $test[$phone],

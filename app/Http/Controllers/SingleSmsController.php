@@ -28,7 +28,12 @@ class SingleSmsController extends Controller
 
     public function send(SendMessageRequest $request)
     {
-        $sms = new SendSingle($request);
+        $req = array(
+            'text' => $request->text,
+            'originator' => $request->originator,
+            'number' => $request->phone
+        );
+        $sms = new SendSingle($req, null, null, Auth::id());
         if ($error = $sms->getError()){
             return redirect()->back()->with(array_key_first($error), $error[array_key_first($error)]);
         }
